@@ -99,8 +99,7 @@ public class ServiceLoaderTask
             for (String it : classNames) {
                 Class<?> aClass = classloader.loadClass(it);
                 if (!(aClass.isInterface() || Modifier.isAbstract(aClass.getModifiers()))
-                        && Modifier.isPublic(aClass.getModifiers())
-                        && aClass.getCanonicalName() != null) {
+                        && Modifier.isPublic(aClass.getModifiers())) {
                     classes.add(aClass);
                 }
             }
@@ -122,7 +121,7 @@ public class ServiceLoaderTask
                 File manifest = new File(outputDirectory, serviceInterface);
                 try (BufferedWriter out = Files.newBufferedWriter(manifest.toPath(), UTF_8)) {
                     for (Class<?> it : implementations) {
-                        out.write(it.getCanonicalName());
+                        out.write(it.getName());
                         out.newLine();
                     }
                 }
